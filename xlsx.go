@@ -47,11 +47,11 @@ func getHeads(sheet *xlsx.Sheet) (ret []Head) {
 		if val == "" {
 			continue
 		}
-		flag := getCellVal(sheet, 2, col, FlagRead)
+		flag := getCellVal(sheet, 3, col, FlagRead)
 		if !isFlagValid(flag) {
 			continue
 		}
-		typ := getCellVal(sheet, 3, col, "")
+		typ := getCellVal(sheet, 2, col, "")
 		typeValid := false
 		for _, v := range validType {
 			if v == typ {
