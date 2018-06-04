@@ -53,34 +53,10 @@ func checkFileMd5() (diff, all []*_Mapping, err error) {
 		}
 	}
 
-	// 删除已经不用的文件
-	// for _, output := range outputs {
-	// 	for j := 0; j < len(dirs); j++ {
-	// 		dir := filepath.Join(conf.OutputDir, output.Type(), dirs[j])
-	// 		filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
-	// 			if info.IsDir() || filepath.Ext(path) != "."+output.Type() {
-	// 				return nil
-	// 			}
-	// 			path = strings.TrimSuffix(filepath.Base(path), "."+output.Type())
-	// 			found := false
-	// 			for _, v := range m {
-	// 				if v.OutFile == path {
-	// 					found = true
-	// 					break
-	// 				}
-	// 			}
-	// 			if !found {
-	// 				p := filepath.Join(conf.OutputDir, output.Type(), dirs[j], path+"."+output.Type())
-	// 				os.Remove(p)
-	// 			}
-	// 			return nil
-	// 		})
-	// 	}
-	// }
 	return
 }
 
-func writeFileMd5(all []_Mapping) {
+func writeFileMd5(all []*_Mapping) {
 	var list []_MD5Pair
 	for _, v := range all {
 		md5 := md5file(path.Join(conf.XlsxDir, v.XlsxFile+".xlsx"))

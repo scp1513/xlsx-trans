@@ -54,7 +54,7 @@ func Xlsx(xlsxDir string) {
 		os.MkdirAll(v.Dir(), 0644)
 	}
 
-	diff, _, err := checkFileMd5()
+	diff, all, err := checkFileMd5()
 	if err != nil {
 		return
 	}
@@ -87,7 +87,7 @@ func Xlsx(xlsxDir string) {
 		}
 	}
 	fmt.Println()
-	//writeFileMd5(all)
+	writeFileMd5(all)
 }
 
 func transOne(mapping *_Mapping, chans chan<- _TransResult) {
@@ -272,8 +272,4 @@ func asignPath(fieldPath string, elem XlsxRow, v interface{}) {
 		elem = this.(map[string]interface{})
 	}
 	elem[nameSl[len(nameSl)-1]] = v
-}
-
-func buildLuaStr(str string) string {
-	return "return json.encode(obj)"
 }
