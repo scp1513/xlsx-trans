@@ -17,9 +17,9 @@ type Output interface {
 	Flag() FlagType
 	BeforeAll()
 	AfterAll()
-	Before(heads []Head, file string, w io.Writer)
-	After(heads []Head, file string, w io.Writer)
-	Row(heads []Head, data XlsxRow, row int, w io.Writer)
+	Before(file string, heads []Head, w io.Writer)
+	After(file string, heads []Head, w io.Writer)
+	Row(file string, heads []Head, data XlsxRow, row int, w io.Writer)
 }
 
 type _Config struct {

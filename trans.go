@@ -225,7 +225,6 @@ func parseLua(v interface{}) (interface{}, error) {
 	luaState := getLuaState()
 	defer releaseLuaState(luaState)
 
-	// luaState.SetGlobal("obj", lua.LString(v.(string)))
 	if err := luaState.DoString("obj = " + v.(string)); err != nil {
 		return nil, err
 	}
@@ -254,11 +253,11 @@ func toFile(output Output, mapping *_Mapping, heads []Head, datas XlsxRows, rows
 			}
 		}
 	}()
-	output.Before(heads, mapping.XlsxFile, file)
+	output.Before(mapping.XlsxFile, heads, file)
 	for _, row := range rows {
-		output.Row(heads, datas[row], row, file)
+		output.Row(mapping.XlsxFile, heads, datas[row], row, file)
 	}
-	output.After(heads, mapping.XlsxFile, file)
+	output.After(mapping.XlsxFile, heads, file)
 	return
 }
 

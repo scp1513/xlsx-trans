@@ -8,13 +8,14 @@ import (
 	"strings"
 )
 
-func splitFileName(filename string) (bool, string, string, string) {
+func splitFileName(filename string) (string, string, string) {
 	s := strings.TrimSuffix(path.Base(filename), path.Ext(filename))
 	ss := strings.Split(s, " - ")
 	if len(ss) >= 2 {
-		return true, strings.TrimSpace(s), strings.TrimSpace(ss[1]), strings.TrimSpace(ss[0])
+		return strings.TrimSpace(s), strings.TrimSpace(ss[1]), strings.TrimSpace(ss[0])
+	} else {
+		return s, s, s
 	}
-	return false, "", "", ""
 }
 
 func checkFileMd5() (diff, all []*_Mapping, err error) {
@@ -32,10 +33,7 @@ func checkFileMd5() (diff, all []*_Mapping, err error) {
 		if info.IsDir() || !isXlsxFile(filename) {
 			continue
 		}
-		validName, basename, nameEN, nameCN := splitFileName(filename)
-		if !validName {
-			continue
-		}
+		basename, nameEN, nameCN := splitFileName(filename)
 
 		mapping := _Mapping{CNFile: nameCN, XlsxFile: basename, OutFile: nameEN}
 		all = append(all, &mapping)
