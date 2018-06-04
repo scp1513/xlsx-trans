@@ -13,9 +13,8 @@ func splitFileName(filename string) (string, string, string) {
 	ss := strings.Split(s, " - ")
 	if len(ss) >= 2 {
 		return strings.TrimSpace(s), strings.TrimSpace(ss[1]), strings.TrimSpace(ss[0])
-	} else {
-		return s, s, s
 	}
+	return s, s, s
 }
 
 func checkFileMd5() (diff, all []*_Mapping, err error) {
